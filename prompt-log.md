@@ -73,3 +73,12 @@
 - ครอบคลุมทุก AC ใน spec อย่างน้อย 1 task ต่อ AC และแยก task สำหรับหน้า mock API และต่อ API จริง
 - ระบุ `Q-02` เป็น Open Question ที่ยังทำให้ task บางส่วนต้องรออยู่
 - ไม่สร้าง task ใดที่นอก scope หรือเดาผลลัพธ์ของหมายเลขคิว
+
+---
+
+## 2569-09-23 14:35 UTC คำสั่ง: /implement T-01
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์ที่สร้าง/แก้: backend/app/config.py, backend/app/db/models.py, backend/app/db/migrations/001_init.py, backend/app/db/__init__.py, backend/app/__init__.py, backend/app/db/migrations/__init__.py, backend/tests/test_AC_BKG_06.py
+- ผล test: `cd backend && pytest tests/test_AC_BKG_06.py -q` ผ่าน
+- สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่มี; ข้อกำหนดชัดเจนว่าต้องใช้ PostgreSQL ตาม CON-TECH-01 และเก็บเฉพาะ HN ตาม IF-HIS-01

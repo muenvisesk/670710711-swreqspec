@@ -16,7 +16,7 @@
 - ไฟล์ที่แตะ: backend/app/db/models.py, backend/app/db/migrations/001_init.py, backend/app/config.py
 - ต้องทำหลัง: ไม่มี
 - เสร็จเมื่อ: migration สร้างตาราง slots, bookings, audit_logs และ schema เก็บเฉพาะ hn ได้ตามข้อกำหนด
-- สถานะ: พร้อมทำ
+- สถานะ: เสร็จ รอทีมตรวจ
 
 ### T-02 สร้าง GET /slots และคำนวณช่วงว่างตามแพ็กเกจ
 - รองรับ: FR-BKG-01, FR-BKG-06, NFR-PERF-01
