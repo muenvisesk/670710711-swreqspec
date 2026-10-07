@@ -97,3 +97,13 @@
 - TC ID ที่เสนอ: TC-BKG-02-1, TC-BKG-02-2, TC-BKG-02-3
 - ส่วนของ Then ที่ spec ไม่ได้บอกชัดเจน: ในกรณีมีคิวแต่ไม่ใช่วันเดียวกัน หรือไม่มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน ควรปฏิเสธหรือไม่ (รอ Q-xx)
 - ผล: หยุดชั่วคราว ไม่เขียนโค้ด test; ต้องตรวจแถวในตาราง แก้ได้ตามต้องการ แล้วเปลี่ยนสถานะเป็น "ใช้ได้" ก่อน จากนั้นสั่ง /testcases อีกครั้ง
+
+---
+
+## 2569-10-07 15.30 คำสั่ง: /implement T-04 specs/001-booking/tasks.md
+
+- ทำเฉพาะไฟล์: backend/app/booking/service.py, backend/app/booking/router.py, backend/tests/test_AC_BKG_02.py
+- ระบุ FR: FR-BKG-02
+- ปัญหา: ไม่มีการตรวจว่าผู้ใช้มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน จึงยอมให้จองซ้ำได้
+- แก้ไข: เพิ่ม `DuplicateBookingError` ใน service และเช็ค `Booking.hn == hn` และ `Booking.booking_date == slot.slot_date` ก่อนตัดที่นั่ง; router คืน HTTP 409 พร้อม `detail="มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน"` และ header `X-Existing-Queue-No`
+- ผล test: รัน `cd backend && pytest -v` แล้วผ่าน 5/5 (รวม test_AC_BKG_02.py)
