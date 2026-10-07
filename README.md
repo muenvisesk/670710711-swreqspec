@@ -42,4 +42,5 @@ prompt-log.md                AI สร้างให้เมื่อใช้
 
 ## Reflection
 
-(เขียนท้ายคาบ 5 บรรทัด)
+Date: 7 Oct 2026
+1. AI helps generate test cases from acceptance criteria, but they may still be incomplete.
