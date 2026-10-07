@@ -53,3 +53,12 @@
 - TC ID ที่เสนอ: TC-BKG-01-1, TC-BKG-01-2, TC-BKG-01-3
 - ผล: หยุดที่การเสนอแบบร่าง ไม่เขียนโค้ด test เนื่องจาก spec ยังไม่มีแถวที่ตรวจแล้ว และต้องให้ทีมตรวจแถวก่อนแก้สถานะเป็น "ใช้ได้" จากนั้นสั่ง /testcases อีกครั้ง
 - ข้อให้ถามทีม: ในกรณีผู้ใช้ยังไม่ได้ยืนยันตัวตน ควรปฏิเสธการจองและแสดงข้อความแบบใด (spec ไม่ได้ระบุชัดเจน)
+
+---
+
+## 2569-10-07 10.15 คำสั่ง: แก้ TC-BKG-01-2 จาก bug ใน backend/app/booking/service.py
+
+- ปัญหา: create_booking ยอมให้จองแม้ slot.remaining == 0 เพราะเช็คแค่ < 0 เท่านั้น
+- แก้เฉพาะไฟล์: backend/app/booking/service.py
+- เปลี่ยน: ถ้า slot.remaining <= 0 ให้ raise SlotFullError(slot_id)
+- ผล verification: รัน `cd backend && pytest -v` แล้วตรวจผลตาม output จริง
