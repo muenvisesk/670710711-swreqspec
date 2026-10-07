@@ -75,3 +75,25 @@
 - ข้อที่ยังไม่ครบ: FR-BKG-02, FR-BKG-03, FR-BKG-04, FR-BKG-05, NFR-SEC-01, NFR-REL-02, NFR-USE-01, DOM-PDPA-01, IF-HIS-01, IF-NOT-01
 - ข้อค้นพบเชิงสัญญา/constraint: FR-BKG-01, FR-BKG-06, CON-TECH-01
 - ข้อค้นพบ test อ่อน: AC-BKG-01 ไม่มี assert สำหรับหมายเลขคิวและ remaining เป็น 0
+
+---
+
+## 2569-10-07 12:10 คำสั่ง: แก้ตาม F-001, F-003, F-004 ใน specs/001-booking/rtm.md
+
+- แก้เฉพาะไฟล์ที่เกี่ยวข้อง:
+  - backend/app/slots/service.py: ปรับ `DAYS_AHEAD` จาก 14 เป็น 30 เพื่อสอดคล้อง FR-BKG-01
+  - backend/app/config.py: ตั้งค่าเริ่มต้นของ `DATABASE_URL` ให้สอดคล้อง CON-TECH-01 เป็น PostgreSQL
+  - backend/tests/test_AC_BKG_01.py: เพิ่ม assert ที่ตรวจ `queue_no` และ `remaining == 0` ตาม AC-BKG-01
+- ไม่แตะ test ที่ชื่อขึ้นต้นด้วย `test_TC_`
+- ผล verification: รัน `cd backend && pytest -v` -> 4 passed, 0 failed
+- หมายเหตุ: F-002 เป็นปัญหาของ spec (FR ไม่มี AC) ไม่ได้แก้ในโค้ดเพราะเป็นความไม่ครบของ spec ไม่ใช่ bug ของ code
+
+---
+
+## 2569-10-07 13.20 คำสั่ง: /testcases AC-BKG-02 specs/001-booking/
+
+- โหมด: ร่าง
+- ข้อค้นพบ: AC-BKG-02 ยังไม่มีแถวใน test-cases.md ที่มีสถานะ "ใช้ได้" จึงเสนอ 3 แถวแบบร่างตาม AC นี้
+- TC ID ที่เสนอ: TC-BKG-02-1, TC-BKG-02-2, TC-BKG-02-3
+- ส่วนของ Then ที่ spec ไม่ได้บอกชัดเจน: ในกรณีมีคิวแต่ไม่ใช่วันเดียวกัน หรือไม่มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน ควรปฏิเสธหรือไม่ (รอ Q-xx)
+- ผล: หยุดชั่วคราว ไม่เขียนโค้ด test; ต้องตรวจแถวในตาราง แก้ได้ตามต้องการ แล้วเปลี่ยนสถานะเป็น "ใช้ได้" ก่อน จากนั้นสั่ง /testcases อีกครั้ง
