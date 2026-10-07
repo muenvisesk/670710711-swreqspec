@@ -62,3 +62,16 @@
 - แก้เฉพาะไฟล์: backend/app/booking/service.py
 - เปลี่ยน: ถ้า slot.remaining <= 0 ให้ raise SlotFullError(slot_id)
 - ผล verification: รัน `cd backend && pytest -v` แล้วตรวจผลตาม output จริง
+
+---
+
+## 2569-10-07 08:30 คำสั่ง: /verify specs/001-booking/
+
+- โหมด: ตรวจ requirement (ไม่แก้โค้ด)
+- ผล test: backend `cd backend && pytest -v` -> 4 passed, 0 failed; frontend `cd frontend && npm test` -> 1 passed, 0 failed
+- สรุปสถานะตามรอยไปข้างหน้า: ครบ 2 แถว, ยังไม่ถึง 10 แถว, ช่องโหว่ 3 แถว, รอ Q-xx 0 แถว
+- ข้อค้นพบใหม่: F-001, F-002, F-003, F-004
+- รายงาน: Requirement ที่ตรงกับ spec และมี test จริง: NFR-PERF-01, IF-IDP-01
+- ข้อที่ยังไม่ครบ: FR-BKG-02, FR-BKG-03, FR-BKG-04, FR-BKG-05, NFR-SEC-01, NFR-REL-02, NFR-USE-01, DOM-PDPA-01, IF-HIS-01, IF-NOT-01
+- ข้อค้นพบเชิงสัญญา/constraint: FR-BKG-01, FR-BKG-06, CON-TECH-01
+- ข้อค้นพบ test อ่อน: AC-BKG-01 ไม่มี assert สำหรับหมายเลขคิวและ remaining เป็น 0
