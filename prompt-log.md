@@ -107,3 +107,16 @@
 - ปัญหา: ไม่มีการตรวจว่าผู้ใช้มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน จึงยอมให้จองซ้ำได้
 - แก้ไข: เพิ่ม `DuplicateBookingError` ใน service และเช็ค `Booking.hn == hn` และ `Booking.booking_date == slot.slot_date` ก่อนตัดที่นั่ง; router คืน HTTP 409 พร้อม `detail="มีคิวที่ยังไม่ได้ใช้ในวันเดียวกัน"` และ header `X-Existing-Queue-No`
 - ผล test: รัน `cd backend && pytest -v` แล้วผ่าน 5/5 (รวม test_AC_BKG_02.py)
+
+---
+
+## 2569-10-07 08:50 คำสั่ง: /verify specs/001-booking/
+
+- โหมด: ตรวจ requirement แบบไม่แก้โค้ด
+- ผล test: `cd backend && pytest -v` -> 5 passed, 0 failed; `cd frontend && npm test` -> 1 passed, 0 failed
+- สรุปสถานะตามรอยไปข้างหน้า: ครบ 5 แถว, ยังไม่ถึง 8 แถว, ช่องโหว่ 2 แถว, รอ Q-xx 0 แถว
+- ข้อค้นพบใหม่: F-005, F-006, F-007, F-008
+- รายงาน: องค์ประกอบที่ตรวจจริงแล้วตรง spec: FR-BKG-01, FR-BKG-02, NFR-PERF-01, CON-TECH-01, IF-IDP-01
+- ข้อที่ยังมีช่องโหว่ชัดเจน: FR-BKG-03 (UI alert/message และตัวเลือก 3 รายการ), FR-BKG-06 (ไม่มี AC), ออกแบบยกเลิกการจองที่อยู่นอก Out of scope
+- ข้อค้นพบที่ต้องให้ทีมตัดสินต่อ: F-005 ถึง F-008
+- ข้อสรุป: requirement ส่วนใหญ่ตรงกับโค้ดที่ทำแล้ว แต่ spec ยังมีช่องว่างใน FR-BKG-03 และ FR-BKG-06 และมีงานที่อยู่นอก scope ในหน้าจอนั้น
